@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        color: #333;
+        overflow: hidden;
+        background: white;
+    }
+
+    .orb {
+        width: 50px;
+        height: 50px;
+        background: #999;
+        border-radius: 50px;
+        margin: 0 24.7px;
+        transition: all 0.2s ease-out;
+        display: inline-block;
+        color: white;
+    }
+
+    .orb:hover {
+        transform: scale(1.2);
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+
+    .wrapperMarquee {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 8px;
+        /* border:1px solid #000; */
+    }
+
+    @media screen and (min-width:930px) {
+        .wrapperMarquee {
+            padding: 0 16px;
+        }
+    }
+
+    .marquee {
+        display: flex;
+        align-items: center;
+        height: 150px;
+        width: 281px;
+        flex-wrap: nowrap;
+        /* border: 2px solid #000; */
+        overflow: hidden;
+        box-sizing: border-box;
+        position: relative;
+        width: 100vw;
+    }
+
+    @media screen and (min-width:930px) {
+        .marquee {
+            height: 250px;
+        }
+    }
+
+    .wrapperScroll {
+        text-align: center;
+    }
+
+    .marquee--inner {
+        display: flex;
+        /* 	width: 300%; */
+        /* padding: 10px; */
+        animation: marquee 5s linear infinite;
+        position: absolute;
+        gap: 15px;
+    }
+
+    .svgButton {
+        fill: white;
+    }
+
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .image {
+        width: 150px;
+        height: 150px;
+        aspect-ratio: 1/1;
+
+    }
+
+    @media screen and (min-width:930px) {
+        .image {
+            width: 250px;
+            height: 250px;
+        }
+    }
+
+    .button {
+        background-color: #2d5d75;
+        height: 40px;
+        width: 40px;
+        border-radius: 8px 0 8px 0;
+        z-index: 5;
+        transition: background-color .3s ease-in-out;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .25);
+        border: none;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    .button:hover {
+        background-color: #1db0d5;
+    }
+
+    .button__left {
+        left: 10px;
+    }
+
+    .button__right {
+        right: 10px;
+    }
+
+    /* Add buttons to change the images */
+    .btn {
+        border: none;
+        outline: none;
+        background-color: inherit;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 18px;
+        position: absolute;
+        z-index: 100;
+    }
+
+    .left {
+        left: 0;
+
+    }
+
+    .right {
+        right: 0;
+    }
+</style>
+<style>
+    .title {
+        text-align: center;
+    }
+
+    .wrapperFlipCards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 8px;
+        height: 400px;
+        position: relative;
+    }
+
+    @media screen and (min-width:500px) {
+        .wrapperFlipsCards {
+
+            gap: 16px;
+        }
+    }
+
+    .imageFlipImage {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 16 / 9;
+    }
+
+    .flipCard {
+
+        margin: unset;
+        width: 100%;
+        height: 100%;
+        transition: transform .8s ease;
+        perspective: 1000px;
+    }
+
+    .flipCard--front {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        color: #fff;
+        font-size: 15px;
+        height: 100%;
+        width: 100%;
+        backface-visibility: hidden;
+        transition: transform .8s ease;
+    }
+
+    .containerCards {
+
+        margin: 0 auto;
+    }
+
+    @media screen and (min-width:500px) {
+        .containerCards {
+            width: 500px;
+        }
+    }
+
+    .flipCard--back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        transform: rotateY(180deg);
+        height: 100%;
+        width: 100%;
+        transition: transform .8s ease;
+        backface-visibility: hidden;
+    }
+
+    .wrapperDescription {
+        padding: 8px;
+    }
+
+    .flipCard__name {
+        display: block;
+        text-align: center;
+    }
+
+    .flipCard__year {
+        display: block;
+        text-align: center;
+    }
+
+    .flipCard__description {
+        display: block;
+        text-align: center;
+    }
+
+    .flipCard:hover .flipCard--front {
+        transform: rotateY(180deg);
+    }
+
+    .flipCard:hover .flipCard--back {
+        transform: rotateY(360deg);
+    }
+</style>
+
+<body>
+    <section class="wrapperScroll">
+
+
+        <h2 class="title scroll__title">Gobernadores 2023</h2>
+        <div class="wrapperMarquee">
+
+            <div class="marquee">
+
+                <!-- <button class="button button__left"><svg class="svgButton" width="10" height="18" viewBox="0 0 10 18"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M9.80811 2.14168L8.33311 0.666676L-0.000227928 9.00001L8.33311 17.3333L9.80811 15.8583L2.94977 9.00001L9.80811 2.14168Z" />
+                    </svg></button> -->
+                <div class="marquee--inner">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g"
+                        alt="https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g">
+
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
+                        alt="https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/21/3008/2008.jpg?hmac=T8DSVNvP-QldCew7WD4jj_S3mWwxZPqdF0CNPksSko4"
+                        alt="https://fastly.picsum.photos/id/21/3008/2008.jpg?hmac=T8DSVNvP-QldCew7WD4jj_S3mWwxZPqdF0CNPksSko4">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0"
+                        alt="">
+
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE"
+                        alt="https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/26/4209/2769.jpg?hmac=vcInmowFvPCyKGtV7Vfh7zWcA_Z0kStrPDW3ppP0iGI"
+                        alt="">
+
+
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g"
+                        alt="https://fastly.picsum.photos/id/19/2500/1667.jpg?hmac=7epGozH4QjToGaBf_xb2HbFTXoV5o8n_cYzB7I4lt6g">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I"
+                        alt="https://fastly.picsum.photos/id/20/3670/2462.jpg?hmac=CmQ0ln-k5ZqkdtLvVO23LjVAEabZQx2wOaT4pyeG10I">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/21/3008/2008.jpg?hmac=T8DSVNvP-QldCew7WD4jj_S3mWwxZPqdF0CNPksSko4"
+                        alt="">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0"
+                        alt="">
+
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE"
+                        alt="https://fastly.picsum.photos/id/23/3887/4899.jpg?hmac=2fo1Y0AgEkeL2juaEBqKPbnEKm_5Mp0M2nuaVERE6eE">
+                    <img class="image"
+                        src="https://fastly.picsum.photos/id/26/4209/2769.jpg?hmac=vcInmowFvPCyKGtV7Vfh7zWcA_Z0kStrPDW3ppP0iGI"
+                        alt="">
+                </div>
+                <!-- <button class="button button__right"><svg class="svgButton" width="10" height="18" viewBox="0 0 10 18"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.191406 2.14168L1.66641 0.666676L9.99974 9.00001L1.66641 17.3333L0.191406 15.8583L7.04974 9.00001L0.191406 2.14168Z" />
+                    </svg></button> -->
+            </div>
+
+
+        </div>
+    </section>
+    <section>
+        <h2 class="title flipCard__title">Gobernadores 2023</h2>
+        <div class="containerCards">
+            <div class="wrapperFlipCards">
+
+                <figure class="flipCard">
+                    <div class="card flipCard--front">
+                        <img class="imageFlipImage" src="https://picsum.photos/seed/picsum/200/" alt="">
+                    </div>
+                    <div class="card flipCard--back">
+                        <div class="wrapperDescription">
+
+                            <span class="flipCard__name">
+                                Freddie Mercury
+                            </span>
+                            <span class="flipCard__year">
+                                1946 - 1991
+                            </span>
+                            <p class="flipCard__description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+
+                            </p>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="flipCard">
+                    <div class="card flipCard--front">
+                        <img class="imageFlipImage" src="https://picsum.photos/seed/picsum/200/" alt="">
+                    </div>
+                    <div class="card flipCard--back">
+                        <div class="wrapperDescription">
+
+                            <span class="flipCard__name">
+                                Freddie Mercury
+                            </span>
+                            <span class="flipCard__year">
+                                1946 - 1991
+                            </span>
+                            <p class="flipCard__description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+
+                            </p>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="flipCard">
+                    <div class="card flipCard--front">
+                        <img class="imageFlipImage" src="https://picsum.photos/seed/picsum/200/" alt="">
+                    </div>
+                    <div class="card flipCard--back">
+                        <div class="wrapperDescription">
+
+                            <span class="flipCard__name">
+                                Freddie Mercury
+                            </span>
+                            <span class="flipCard__year">
+                                1946 - 1991
+                            </span>
+                            <p class="flipCard__description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+
+                            </p>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="flipCard">
+                    <div class="card flipCard--front">
+                        <img class="imageFlipImage" src="https://picsum.photos/seed/picsum/200/" alt="">
+                    </div>
+                    <div class="card flipCard--back">
+                        <div class="wrapperDescription">
+
+                            <span class="flipCard__name">
+                                Freddie Mercury
+                            </span>
+                            <span class="flipCard__year">
+                                1946 - 1991
+                            </span>
+                            <p class="flipCard__description">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+
+                            </p>
+                        </div>
+                    </div>
+                </figure>
+
+
+
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
